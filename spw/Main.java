@@ -1,12 +1,26 @@
 package f4;
-import java.awt.BorderLayout;
-import javax.swing.JFrame;
-public class Main {
-	public static void main(String [] args){
-		JFrame frame = new JFrame("Space War");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(400, 650);
-		frame.setVisible(true);
-	}
 
-}
+import javax.swing.*;		  
+import javax.swing.*;
+import java.awt.*;		  
+import java.awt.*;
+  		  
+public class Main{
+  	public static void main(String args[]){		
+  		
+  		SpaceShip v = new SpaceShip(180, 550, 20, 20);
+		GamePanel gp = new GamePanel();
+		GameEngine engine = new GameEngine(gp, v);	
+		
+	 	JFrame f = new JFrame("Space War");
+	 	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		  		
+		f.setSize(400,650);
+		f.getContentPane().add(gp, BorderLayout.CENTER);
+		f.setVisible(true);
+		
+		
+		
+		engine.start();
+			
+  	}		  	
+  } 		  
