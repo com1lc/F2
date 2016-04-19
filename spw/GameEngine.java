@@ -11,12 +11,13 @@ import java.util.Iterator;
 import javax.swing.Timer;
 
 
-public class GameEngine{
+public class GameEngine implements KeyListener{
 	GamePanel gp;
 			
 	private SpaceShip v;	
 	private Timer timer;
-
+	private double difficulty = 0.1;
+	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
 		this.v = v;		
@@ -29,7 +30,9 @@ public class GameEngine{
 				process();
 			}
 		});
+		
 		timer.setRepeats(true);
+		
 	}
 	
 	public void start(){
@@ -42,5 +45,42 @@ public class GameEngine{
 	
 	public void die(){
 		timer.stop();
+	}
+	
+	
+	void controlVehicle(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		
+		case KeyEvent.VK_LEFT: 
+				v.move(-1); 
+				break;
+								
+		case KeyEvent.VK_RIGHT: 
+				v.move(1); 
+				break;
+								
+		case KeyEvent.VK_D: 
+				difficulty += 0.1;
+				break;				
+		}
+	}
+	
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		controlVehicle(e);
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}	
 }
