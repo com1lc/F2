@@ -13,7 +13,8 @@ import javax.swing.Timer;
 
 public class GameEngine implements KeyListener{
 	GamePanel gp;
-			
+	
+	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();		
 	private SpaceShip v;	
 	private Timer timer;
 	private double difficulty = 0.1;
@@ -38,9 +39,22 @@ public class GameEngine implements KeyListener{
 	public void start(){
 		timer.start();
 	}
-	
+	private void generateEnemy(){
+		Enemy e = new Enemy((int)(Math.random()*390), 30);
+		gp.sprites.add(e);
+		enemies.add(e);
+	}
 	private void process(){
+		if(Math.random() < difficulty){
+			generateEnemy();
+		}
+		Iterator<Enemy> e_iter = enemies.iterator();
+		while(e_iter.hasNext()){
+			Enemy e = e_iter.next();
+			e.proceed();
+		}
 		gp.updateGameUI();
+		
 	}
 	
 	public void die(){
