@@ -14,7 +14,8 @@ import javax.swing.Timer;
 public class GameEngine implements KeyListener{
 	GamePanel gp;
 	
-	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();		
+	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private SpaceShip v;	
 	private Timer timer;
 	private double difficulty = 0.1;
@@ -44,6 +45,7 @@ public class GameEngine implements KeyListener{
 		gp.sprites.add(e);
 		enemies.add(e);
 	}
+
 	private void process(){
 		if(Math.random() < difficulty){
 			generateEnemy();
@@ -52,6 +54,11 @@ public class GameEngine implements KeyListener{
 		while(e_iter.hasNext()){
 			Enemy e = e_iter.next();
 			e.proceed();
+		}
+		Iterator<Bullet> b_iter = bullets.iterator();
+		while(b_iter.hasNext()){
+			Bullet b = b_iter.next();
+			b.proceed();
 		}
 		gp.updateGameUI();
 		
@@ -66,12 +73,14 @@ public class GameEngine implements KeyListener{
 		}
 	}
 	
-	
-	
 	public void die(){
 		timer.stop();
 	}
-	
+	public void fire(){
+		Bullet b = new Bullet((v.x) + (v.width/3), (v.y));
+		gp.sprites.add(b);
+		bullets.add(b);
+	}
 	
 	void controlVehicle(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -86,7 +95,11 @@ public class GameEngine implements KeyListener{
 								
 		case KeyEvent.VK_D: 
 				difficulty += 0.1;
-				break;				
+				break;	
+				
+		case KeyEvent.VK_SPACE:
+				fire();
+				break;
 		}
 	}
 	

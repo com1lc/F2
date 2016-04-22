@@ -14,13 +14,13 @@ public class GamePanel extends JPanel {
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
 	public GamePanel() {
-		bi = new BufferedImage(400, 600, BufferedImage.TYPE_INT_ARGB);
+		bi = new BufferedImage(400, 650, BufferedImage.TYPE_INT_ARGB);
 		big = (Graphics2D) bi.getGraphics();
 		big.setBackground(Color.BLACK);
 	}
 
 	public void updateGameUI(){
-		big.clearRect(0, 0, 400, 600);
+		big.clearRect(0, 0, 400, 650);
 				
 		for(Sprite s : sprites){
 			s.draw(big);
