@@ -10,7 +10,8 @@ import javax.swing.ImageIcon;
 
 public class Bullet extends Sprite{
 	
-	private int step = 20; // SpeedOfShooting      
+	private int step = 20; // SpeedOfShooting 
+	private boolean alive = true;
 	
 	public Bullet(int x, int y) {
 		super(x, y, 10, 20);
@@ -27,6 +28,12 @@ public class Bullet extends Sprite{
 	public void proceed(){
 		y -= step;
 
+	}
+	public boolean isAlive(){
+		return alive;
+	}
+	public void bulletdie(){
+		alive = false;
 	}
 	
 }
