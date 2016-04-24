@@ -11,7 +11,7 @@ import java.util.Iterator;
 import javax.swing.Timer;
 
 
-public class GameEngine implements KeyListener{
+public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
 	
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -19,7 +19,7 @@ public class GameEngine implements KeyListener{
 	private SpaceShip v;	
 	private Timer timer;
 	private double difficulty = 0.1;
-	
+	private long score = 0;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
@@ -75,7 +75,7 @@ public class GameEngine implements KeyListener{
 			}
 		}
 		
-		gp.updateGameUI();
+		gp.updateGameUI(this);
 		
 		Rectangle2D.Double vr = v.getRectangle();
 		Rectangle2D.Double er;
@@ -91,6 +91,7 @@ public class GameEngine implements KeyListener{
 				if(br.intersects(er)){
 					gp.sprites.remove(e);
 					e.enemydie();
+					score += 10;
 				}
 			}
 			
@@ -127,7 +128,10 @@ public class GameEngine implements KeyListener{
 				break;
 		}
 	}
-	
+	@Override
+	public long getScore(){
+		return score; 
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -145,5 +149,6 @@ public class GameEngine implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
 }

@@ -1,6 +1,7 @@
 package f4;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -19,8 +20,12 @@ public class GamePanel extends JPanel {
 		big.setBackground(Color.BLACK);
 	}
 
-	public void updateGameUI(){
+	public void updateGameUI(GameReporter reporter){
 		big.clearRect(0, 0, 400, 650);
+		
+		big.setColor(Color.WHITE);
+		big.setFont(new Font("Corier", Font.BOLD, 12));
+		big.drawString(String.format("%08d", reporter.getScore()), 300, 20);
 				
 		for(Sprite s : sprites){
 			s.draw(big);
