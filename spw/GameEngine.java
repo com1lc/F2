@@ -112,11 +112,18 @@ public class GameEngine implements KeyListener, GameReporter{
 		switch (e.getKeyCode()) {
 		
 		case KeyEvent.VK_LEFT: 
-				v.move(-1); 
+				v.move(-1, 0); 
 				break;
 								
 		case KeyEvent.VK_RIGHT: 
-				v.move(1); 
+				v.move(1, 0); 
+				break;
+				
+		case KeyEvent.VK_UP:
+				v.move(0, -1);
+				break;
+		case KeyEvent.VK_DOWN:
+				v.move(0, 1);
 				break;
 								
 		case KeyEvent.VK_D: 
