@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
 	
+	public boolean itemActive = false;
 	private BufferedImage bi;	
 	Graphics2D big;
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
@@ -26,7 +27,11 @@ public class GamePanel extends JPanel {
 		big.setColor(Color.WHITE);
 		big.setFont(new Font("Corier", Font.BOLD, 12));
 		big.drawString(String.format("%08d", reporter.getScore()), 300, 20);
-				
+		if(itemActive){	
+			big.setColor(Color.ORANGE);
+	        big.setFont(new Font("Courier", Font.BOLD, 12));
+	        big.drawString(String.format(" MultiBullet %02d", reporter.getItem()), 0, 35);
+		}
 		for(Sprite s : sprites){
 			s.draw(big);
 		}
